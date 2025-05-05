@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://8bt2k463w8f"]
+
+[ext_resource type="PackedScene" uid="uid://wp4msiqittum" path="res://scene/Hp_Rage_bar/Hp_and_Rage_bar.tscn" id="1_4onys"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hp_and_Rage_bar" parent="CanvasLayer" instance=ExtResource("1_4onys")]
+offset_left = 28.0
+offset_top = 41.0
+offset_right = 428.0
+offset_bottom = 132.26

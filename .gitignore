@@ -1,0 +1,6 @@
+assets
+addons
+demo
+.tmp
+srcs/.vscode/launch.json
+/srcs/.vscode

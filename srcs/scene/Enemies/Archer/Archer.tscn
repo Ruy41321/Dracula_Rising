@@ -1,0 +1,138 @@
+[gd_scene load_steps=11 format=3 uid="uid://bqt7prp3xq6xs"]
+
+[ext_resource type="Script" uid="uid://e48c021hhhq8" path="res://scene/Enemies/Archer/script/archer.gd" id="1_xlkbe"]
+[ext_resource type="Texture2D" uid="uid://hlej4sdju2h1" path="res://assets/Archer/walk_idle.png" id="2_vrifl"]
+[ext_resource type="PackedScene" uid="uid://eel4n860uep8" path="res://scene/Enemies/EnemiesHpBar/HpBar.tscn" id="3_p5q86"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yms6v"]
+radius = 310.0
+height = 620.049
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xlkbe"]
+radius = 169.575
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u414q"]
+size = Vector2(20, 35)
+
+[sub_resource type="Animation" id="Animation_efrtj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_rweot"]
+resource_name = "idle"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_5pnb1"]
+resource_name = "walk"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dbr0f"]
+_data = {
+&"RESET": SubResource("Animation_efrtj"),
+&"idle": SubResource("Animation_rweot"),
+&"walk": SubResource("Animation_5pnb1")
+}
+
+[node name="Archer" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_xlkbe")
+
+[node name="AttackArea" type="Area2D" parent="."]
+scale = Vector2(1.20313, 1.23438)
+collision_layer = 0
+collision_mask = 4
+
+[node name="AtkCollision" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CapsuleShape2D_yms6v")
+debug_color = Color(0.560784, 0.54902, 0.286275, 0.054902)
+
+[node name="ArrowRayCast" type="RayCast2D" parent="AttackArea"]
+target_position = Vector2(310, 0)
+collision_mask = 5
+
+[node name="AggroArea" type="Area2D" parent="."]
+scale = Vector2(1.20313, 1.23438)
+collision_layer = 0
+collision_mask = 4
+
+[node name="AggroCollision" type="CollisionShape2D" parent="AggroArea"]
+shape = SubResource("CircleShape2D_xlkbe")
+debug_color = Color(0, 0.752941, 0.878431, 0.0470588)
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_u414q")
+debug_color = Color(0, 0.65098, 0.0745098, 0.133333)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(1, 3)
+scale = Vector2(0.800783, 1.23438)
+texture = ExtResource("2_vrifl")
+hframes = 7
+vframes = 2
+
+[node name="LeftFloorCast" type="RayCast2D" parent="Sprite"]
+position = Vector2(-13.7366, 15.3923)
+target_position = Vector2(0, 29)
+
+[node name="RightFloorCast" type="RayCast2D" parent="Sprite"]
+position = Vector2(11.239, 15.3923)
+target_position = Vector2(0, 29)
+
+[node name="ChangeDirectionTimer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="HpBar" parent="." instance=ExtResource("3_p5q86")]
+offset_left = -19.0
+offset_top = -28.0
+offset_right = 77.0
+offset_bottom = -4.0
+
+[node name="RetraitTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dbr0f")
+}

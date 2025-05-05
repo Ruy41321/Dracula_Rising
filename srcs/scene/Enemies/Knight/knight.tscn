@@ -1,0 +1,112 @@
+[gd_scene load_steps=10 format=3 uid="uid://bl8fvio6xwkbb"]
+
+[ext_resource type="Script" uid="uid://q7ec7mxmep4n" path="res://scene/Enemies/Knight/script/Knight.gd" id="1_5v1x0"]
+[ext_resource type="Texture2D" uid="uid://5mtjg4qc50np" path="res://assets/Knight/OriginalKnight.png" id="2_834lh"]
+[ext_resource type="PackedScene" uid="uid://eel4n860uep8" path="res://scene/Enemies/EnemiesHpBar/HpBar.tscn" id="9_4lu1s"]
+[ext_resource type="PackedScene" uid="uid://be0joifig4fpl" path="res://scene/Enemies/Sword/Sword.tscn" id="10_y0v56"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5v1x0"]
+radius = 12.0
+height = 42.0
+
+[sub_resource type="Animation" id="Animation_ahg30"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_okloo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_i36pr"]
+resource_name = "Walk"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ahg30"]
+_data = {
+&"Idle": SubResource("Animation_ahg30"),
+&"RESET": SubResource("Animation_okloo"),
+&"Walk": SubResource("Animation_i36pr")
+}
+
+[node name="Knight" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_5v1x0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 8)
+shape = SubResource("CapsuleShape2D_5v1x0")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 8)
+texture = ExtResource("2_834lh")
+hframes = 3
+vframes = 2
+
+[node name="TargetRayCast" type="RayCast2D" parent="Sprite"]
+visible = false
+scale = Vector2(1, 10)
+target_position = Vector2(100, 0)
+collision_mask = 4
+
+[node name="LeftFloorCast" type="RayCast2D" parent="Sprite"]
+position = Vector2(-11, 20)
+target_position = Vector2(0, 29)
+
+[node name="RightFloorCast" type="RayCast2D" parent="Sprite"]
+position = Vector2(9, 20)
+target_position = Vector2(0, 29)
+
+[node name="RetraitTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="HpBar" parent="." instance=ExtResource("9_4lu1s")]
+offset_left = -19.0
+offset_top = -23.0
+offset_right = 77.0
+offset_bottom = 1.0
+
+[node name="Sword" parent="." instance=ExtResource("10_y0v56")]
+position = Vector2(9, 12)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ahg30")
+}

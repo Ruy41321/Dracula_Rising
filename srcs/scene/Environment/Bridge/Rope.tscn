@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhej3y27t2k04"]
+
+[ext_resource type="Script" uid="uid://dhkykgavemg4a" path="res://scene/Environment/Bridge/script/rope.gd" id="1_gak6a"]
+[ext_resource type="Texture2D" uid="uid://expry3wmxylx" path="res://assets/Props/rope.png" id="2_qs478"]
+[ext_resource type="PackedScene" uid="uid://eel4n860uep8" path="res://scene/Enemies/EnemiesHpBar/HpBar.tscn" id="3_qs478"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsfmu"]
+size = Vector2(7, 39)
+
+[node name="Rope" type="Area2D" groups=["rope"]]
+script = ExtResource("1_gak6a")
+
+[node name="Scroll1" type="Sprite2D" parent="."]
+rotation = -0.781907
+texture = ExtResource("2_qs478")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_dsfmu")
+
+[node name="HpBar" parent="." instance=ExtResource("3_qs478")]
+visible = false
+offset_left = -7.0
+offset_top = -17.0
+offset_right = 89.0
+offset_bottom = 7.0
+scale = Vector2(0.15, 0.1)

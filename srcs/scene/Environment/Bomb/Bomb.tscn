@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://rg7sxx3jra5t"]
+
+[ext_resource type="Shader" uid="uid://bcom5g0h31qvd" path="res://scene/Environment/Bomb/script/bomb.gdshader" id="1_8ct1c"]
+[ext_resource type="Texture2D" uid="uid://bgp6wc85qg3id" path="res://assets/environment/Obstacles1.png" id="1_50lgd"]
+[ext_resource type="Script" uid="uid://w8i0j1mwvklk" path="res://scene/Environment/Bomb/script/bomb.gd" id="1_jyocl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rx8os"]
+shader = ExtResource("1_8ct1c")
+shader_parameter/time = 0.0
+shader_parameter/frame_scope = 3.0
+shader_parameter/use_system_time = false
+shader_parameter/time_accel = 5.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_50lgd"]
+size = Vector2(16, 22)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ct1c"]
+shader = ExtResource("1_8ct1c")
+shader_parameter/time = 0.0
+shader_parameter/frame_scope = 10.0
+shader_parameter/use_system_time = true
+shader_parameter/time_accel = 5.0
+
+[node name="Bomb" type="StaticBody2D" groups=["box"]]
+material = SubResource("ShaderMaterial_rx8os")
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_jyocl")
+
+[node name="Obstacles1" type="Sprite2D" parent="."]
+scale = Vector2(1.42, 1.42)
+texture = ExtResource("1_50lgd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_50lgd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_8ct1c")
+offset_left = -42.0
+offset_top = -35.0
+offset_right = 42.0
+offset_bottom = 34.0

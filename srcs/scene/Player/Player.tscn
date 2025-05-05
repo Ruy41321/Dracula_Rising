@@ -1,0 +1,260 @@
+[gd_scene load_steps=18 format=3 uid="uid://mgxyca564pla"]
+
+[ext_resource type="Script" uid="uid://cxlndqvp43ywc" path="res://scene/Player/script/player.gd" id="1_bs55x"]
+[ext_resource type="PackedScene" uid="uid://8bt2k463w8f" path="res://scene/GUIControl/GUI_control.tscn" id="3_a1q3d"]
+[ext_resource type="Texture2D" uid="uid://j53th7nt6wun" path="res://assets/player/all.png" id="4_78cl7"]
+[ext_resource type="Texture2D" uid="uid://cce60rhg14sch" path="res://assets/player/Frusta.png" id="6_ve2us"]
+[ext_resource type="Script" uid="uid://bhbx1mia2krwo" path="res://scene/Player/script/weapon_remote.gd" id="7_46pjf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cj8ta"]
+size = Vector2(23, 37)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7lbk3"]
+radius = 11.29
+height = 80.0
+
+[sub_resource type="Animation" id="Animation_k1yjj"]
+resource_name = "Attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(0.189466, 1, 1),
+"update": 0,
+"values": [Vector2i(0, 0), Vector2i(6, 0), Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_k2g04"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cpuyg"]
+_data = {
+&"Attack": SubResource("Animation_k1yjj"),
+&"RESET": SubResource("Animation_k2g04")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1q3d"]
+size = Vector2(28, 42.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wsr1k"]
+size = Vector2(23, 37)
+
+[sub_resource type="Animation" id="Animation_78cl7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_0fwxj"]
+resource_name = "idle_anim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 6]
+}
+
+[sub_resource type="Animation" id="Animation_wsr1k"]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [7, 13]
+}
+
+[sub_resource type="Animation" id="Animation_46pjf"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(0.594604, 1, 1),
+"update": 0,
+"values": [14, 16, 14]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wsr1k"]
+_data = {
+&"RESET": SubResource("Animation_78cl7"),
+&"idle_anim": SubResource("Animation_0fwxj"),
+&"jump": SubResource("Animation_wsr1k"),
+&"walk": SubResource("Animation_46pjf")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 4
+collision_mask = 21
+script = ExtResource("1_bs55x")
+debug_mode = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_cj8ta")
+
+[node name="AtkAreaMarker" type="Marker2D" parent="."]
+
+[node name="MeleeAttackArea" type="Area2D" parent="AtkAreaMarker"]
+position = Vector2(50, 0)
+collision_layer = 0
+collision_mask = 50
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AtkAreaMarker/MeleeAttackArea"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7lbk3")
+debug_color = Color(0.594029, 0.54375, 0.139511, 0.42)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AtkAreaMarker/MeleeAttackArea"]
+libraries = {
+&"": SubResource("AnimationLibrary_cpuyg")
+}
+autoplay = "RESET"
+
+[node name="Sprite2D" type="Sprite2D" parent="AtkAreaMarker/MeleeAttackArea"]
+visible = false
+position = Vector2(0, 1)
+scale = Vector2(0.264368, 0.574074)
+texture = ExtResource("6_ve2us")
+hframes = 7
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false
+rotation = 4.71239
+scale = Vector2(1.81, 1.81)
+collision_mask = 2
+
+[node name="DetachRay" type="RayCast2D" parent="."]
+visible = false
+rotation = 4.71239
+scale = Vector2(0.515, 0.515)
+target_position = Vector2(4.12489e-05, 42.7184)
+collision_mask = 23
+
+[node name="DashShoveTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Control" parent="." instance=ExtResource("3_a1q3d")]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 0.25)
+shape = SubResource("RectangleShape2D_a1q3d")
+debug_color = Color(0.823095, 0.377075, 0.363333, 0.42)
+
+[node name="DelayAttackTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="CameraRemote" type="RemoteTransform2D" parent="."]
+
+[node name="Area2D2" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_wsr1k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.999999, -4.76837e-07)
+scale = Vector2(0.2, 0.217)
+texture = ExtResource("4_78cl7")
+hframes = 7
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wsr1k")
+}
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(20, -7)
+script = ExtResource("7_46pjf")
+
+[node name="WallJumpTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="FixedRageTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="body_entered" from="AtkAreaMarker/MeleeAttackArea" to="." method="_on_melee_attack_area_body_entered"]
+[connection signal="timeout" from="DashShoveTimer" to="." method="_on_dash_shove_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
+[connection signal="timeout" from="WallJumpTimer" to="." method="_on_wall_jump_timer_timeout"]
+[connection signal="timeout" from="FixedRageTimer" to="." method="_on_fixed_rage_timer_timeout"]

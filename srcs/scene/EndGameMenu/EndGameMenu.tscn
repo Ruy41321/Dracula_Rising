@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc3vmt2vcn4eb"]
+
+[ext_resource type="Script" uid="uid://ddwkyujmo707f" path="res://scene/EndGameMenu/script/end_game_menu.gd" id="1_e7b4v"]
+[ext_resource type="Shader" uid="uid://b387f6ixgiw0n" path="res://scene/PauseMenu/script/shader/pause_menu.gdshader" id="2_rfxqy"]
+[ext_resource type="Texture2D" uid="uid://b2lr8a17ywwd5" path="res://assets/HUD/Box.png" id="3_hksus"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hksus"]
+shader = ExtResource("2_rfxqy")
+shader_parameter/amount = 2.5
+
+[node name="EndGameMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
+script = ExtResource("1_e7b4v")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = 3
+material = SubResource("ShaderMaterial_hksus")
+layout_mode = 0
+offset_left = -1185.0
+offset_top = -738.0
+offset_right = 1180.0
+offset_bottom = 669.0
+
+[node name="ColorRect" type="Sprite2D" parent="."]
+z_index = 3
+position = Vector2(30, 0)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("3_hksus")
+
+[node name="GameOverLabel" type="RichTextLabel" parent="ColorRect"]
+visible = false
+offset_left = -230.233
+offset_top = -209.302
+offset_right = -52.2326
+offset_bottom = -181.302
+scale = Vector2(1.815, 1.815)
+text = "Game Over ! Hai Perso"
+
+[node name="WinLabel" type="RichTextLabel" parent="ColorRect"]
+offset_left = -248.837
+offset_top = -239.535
+offset_right = -52.8372
+offset_bottom = -188.535
+scale = Vector2(1.815, 1.815)
+text = "		    Complimenti !
+	Hai superato il livello"
+
+[node name="GameTime" type="RichTextLabel" parent="ColorRect"]
+offset_left = -220.93
+offset_top = -18.6046
+offset_right = -51.9302
+offset_bottom = 35.3954
+scale = Vector2(1.97, 1.97)
+text = "La partita è durata:
+	XXmin e XXsec"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+offset_left = -153.488
+offset_top = 186.047
+offset_right = -51.4884
+offset_bottom = 226.047
+scale = Vector2(1.715, 1.715)
+alignment = 1
+
+[node name="Back" type="Button" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="Retry" type="Button" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+text = "Retry"
+
+[node name="Continue" type="Button" parent="ColorRect/HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Continue"

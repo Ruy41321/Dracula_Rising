@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://eel4n860uep8"]
+
+[ext_resource type="Texture2D" uid="uid://bmmp2hqq3nlj8" path="res://assets/progerssbar/texture.png" id="1_cklpo"]
+[ext_resource type="Script" uid="uid://coarenkx0q6qh" path="res://scene/Enemies/EnemiesHpBar/script/hp_bar.gd" id="1_q1l33"]
+
+[node name="HpBar" type="TextureProgressBar"]
+offset_right = 96.0
+offset_bottom = 24.0
+scale = Vector2(0.4, 0.25)
+value = 50.0
+texture_under = ExtResource("1_cklpo")
+texture_progress = ExtResource("1_cklpo")
+tint_under = Color(0.00392157, 0, 0, 0.211765)
+tint_progress = Color(0.666667, 0, 0, 1)
+script = ExtResource("1_q1l33")

@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfo2qwjimef8b"]
+
+[ext_resource type="Script" uid="uid://ymxuly8al0gh" path="res://scene/PauseMenu/script/pause_menu.gd" id="1_ufddh"]
+[ext_resource type="Shader" uid="uid://b387f6ixgiw0n" path="res://scene/PauseMenu/script/shader/pause_menu.gdshader" id="2_cm4nb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kg532"]
+shader = ExtResource("2_cm4nb")
+shader_parameter/amount = 2.5
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ufddh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 3
+material = SubResource("ShaderMaterial_kg532")
+layout_mode = 2
+offset_left = -1185.0
+offset_top = -738.0
+offset_right = 1180.0
+offset_bottom = 669.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+z_index = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -109.5
+offset_top = -220.5
+offset_right = -30.5
+offset_bottom = -49.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(-30.645, -50)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Continue" type="Button" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Continue
+"
+
+[node name="Retry" type="Button" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Retry
+"
+
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"

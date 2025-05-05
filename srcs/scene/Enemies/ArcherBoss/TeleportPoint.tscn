@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bh7vtbx0450hn"]
+
+[node name="TeleportPoint" type="Marker2D"]

@@ -1,0 +1,220 @@
+[gd_scene load_steps=7 format=3 uid="uid://rv6e5yvt8cgy"]
+
+[ext_resource type="Shader" uid="uid://wbudlji68i4n" path="res://scene/StartScreen/shader/StartScreen.gdshader" id="1_qp316"]
+[ext_resource type="Script" uid="uid://oim1sc74dalw" path="res://scene/StartScreen/script/start_screen.gd" id="1_sygby"]
+[ext_resource type="Texture2D" uid="uid://bn5piqxwn3f6i" path="res://assets/HUD/Box.png" id="3_0s2q6"]
+[ext_resource type="Texture2D" uid="uid://bgxvrvqpkkvg6" path="res://assets/startscreen/X_button.png" id="3_iqfij"]
+[ext_resource type="Texture2D" uid="uid://nhnacerf41ag" path="res://assets/startscreen/X_button_focused.png" id="4_e2xdf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_58qwi"]
+shader = ExtResource("1_qp316")
+
+[node name="StartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sygby")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_58qwi")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -134.0
+offset_right = 6.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="Play" type="Button" parent="ColorRect/MainMenu"]
+layout_mode = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="ColorRect/MainMenu"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Credits" type="Button" parent="ColorRect/MainMenu"]
+layout_mode = 2
+text = "Credits"
+
+[node name="Quit" type="Button" parent="ColorRect/MainMenu"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="LevelMenu" type="VBoxContainer" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -175.0
+offset_right = 9.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="Level1" type="Button" parent="ColorRect/LevelMenu"]
+layout_mode = 2
+text = "Level 1
+"
+
+[node name="Level2" type="Button" parent="ColorRect/LevelMenu"]
+layout_mode = 2
+text = "Level 2
+"
+
+[node name="Level3" type="Button" parent="ColorRect/LevelMenu"]
+layout_mode = 2
+text = "Level3"
+
+[node name="Level4" type="Button" parent="ColorRect/LevelMenu"]
+layout_mode = 2
+text = "Level 4
+"
+
+[node name="Back" type="Button" parent="ColorRect/LevelMenu"]
+layout_mode = 2
+text = "Back
+"
+
+[node name="SettingsPanel" type="Sprite2D" parent="ColorRect"]
+visible = false
+position = Vector2(621, 298)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("3_0s2q6")
+
+[node name="CompletedGameText" type="RichTextLabel" parent="ColorRect/SettingsPanel"]
+offset_left = -488.288
+offset_top = -241.441
+offset_right = 134.712
+offset_bottom = 74.5586
+scale = Vector2(1.395, 1.395)
+theme_override_colors/default_color = Color(0.621524, 0.621524, 0.621524, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "Movement: 		 WASD
+DASH: 			 Shift / P
+Melee atk: 				 O
+Throwing Weapon: K"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseSettingsPanelButton" type="TextureButton" parent="ColorRect/SettingsPanel"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1129.0
+offset_top = -293.0
+offset_right = -990.0
+offset_bottom = -160.0
+grow_horizontal = 0
+scale = Vector2(0.555, 0.555)
+texture_normal = ExtResource("3_iqfij")
+texture_hover = ExtResource("4_e2xdf")
+
+[node name="DebugBox" type="CheckBox" parent="ColorRect/SettingsPanel"]
+offset_left = -174.775
+offset_top = 230.631
+offset_right = -48.7747
+offset_bottom = 280.631
+scale = Vector2(2.05, 2.05)
+text = "Debug Mode"
+
+[node name="CompletedGamePanel" type="Sprite2D" parent="ColorRect"]
+visible = false
+position = Vector2(621, 298)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("3_0s2q6")
+
+[node name="CompletedGameText" type="RichTextLabel" parent="ColorRect/CompletedGamePanel"]
+offset_left = -508.108
+offset_top = -234.234
+offset_right = 114.892
+offset_bottom = 120.766
+scale = Vector2(1.395, 1.395)
+theme_override_colors/default_color = Color(0.662745, 0.341176, 1, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "Complimenti hai terminato il nostro gioco.
+Grazie per aver giocato, ora puoi cimentarti nei livelli nell'ordine che preferisci.
+
+Prova a migliorare il tuo tempo"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseCompletedPanelButton" type="TextureButton" parent="ColorRect/CompletedGamePanel"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1129.0
+offset_top = -293.0
+offset_right = -990.0
+offset_bottom = -160.0
+grow_horizontal = 0
+scale = Vector2(0.555, 0.555)
+texture_normal = ExtResource("3_iqfij")
+texture_hover = ExtResource("4_e2xdf")
+
+[node name="CreditsPanel" type="Sprite2D" parent="ColorRect"]
+visible = false
+position = Vector2(621, 298)
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("3_0s2q6")
+
+[node name="CreditsText" type="RichTextLabel" parent="ColorRect/CreditsPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -527.928
+offset_top = -605.405
+offset_right = -482.928
+offset_bottom = -619.405
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.295, 1.295)
+theme_override_colors/default_color = Color(0.596078, 0.439216, 0.717647, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "ProjectManager:						gVigilan
+
+Artist:											gFezzuog
+
+Mechanics, Level Design:	    mBardett 
+													lPennisi
+	"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="CloseCreditsPanelButton" type="TextureButton" parent="ColorRect/CreditsPanel"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1129.0
+offset_top = -293.0
+offset_right = -990.0
+offset_bottom = -160.0
+grow_horizontal = 0
+scale = Vector2(0.555, 0.555)
+texture_normal = ExtResource("3_iqfij")
+texture_hover = ExtResource("4_e2xdf")

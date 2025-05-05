@@ -1,0 +1,176 @@
+[gd_scene load_steps=6 format=3 uid="uid://rv6e5yvt8cgy"]
+
+[ext_resource type="Shader" uid="uid://wbudlji68i4n" path="res://scene/StartScreen/shader/StartScreen.gdshader" id="1_qp316"]
+[ext_resource type="Script" uid="uid://oim1sc74dalw" path="res://scene/StartScreen/script/start_screen.gd" id="1_sygby"]
+[ext_resource type="Texture2D" uid="uid://bgxvrvqpkkvg6" path="res://assets/startscreen/X_button.png" id="4_0s2q6"]
+[ext_resource type="Texture2D" uid="uid://nhnacerf41ag" path="res://assets/startscreen/X_button_focused.png" id="4_s4gi3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_58qwi"]
+shader = ExtResource("1_qp316")
+
+[node name="StartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sygby")
+debug_mode = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_58qwi")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -134.0
+offset_right = 6.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="Play" type="Button" parent="ColorRect/MainMenu"]
+layout_mode = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="ColorRect/MainMenu"]
+visible = false
+layout_mode = 2
+text = "Settings"
+
+[node name="Credits" type="Button" parent="ColorRect/MainMenu"]
+layout_mode = 2
+text = "Credits"
+
+[node name="Quit" type="Button" parent="ColorRect/MainMenu"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="LevelMenu" type="VBoxContainer" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -88.0
+offset_right = 12.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="Level1" type="Button" parent="ColorRect/LevelMenu"]
+layout_mode = 2
+text = "Level 1
+"
+
+[node name="Level2" type="Button" parent="ColorRect/LevelMenu"]
+layout_mode = 2
+text = "Level 2
+"
+
+[node name="Level3" type="Button" parent="ColorRect/LevelMenu"]
+layout_mode = 2
+text = "Level 3"
+
+[node name="Back" type="Button" parent="ColorRect/LevelMenu"]
+layout_mode = 2
+text = "Back
+"
+
+[node name="CompletedGamePanel" type="Panel" parent="ColorRect"]
+visible = false
+layout_mode = 0
+offset_left = 280.0
+offset_top = 189.0
+offset_right = 895.0
+offset_bottom = 480.0
+
+[node name="CompletedGameText" type="RichTextLabel" parent="ColorRect/CompletedGamePanel"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 4.0
+offset_right = 558.0
+offset_bottom = 300.0
+theme_override_colors/default_color = Color(0.662745, 0.341176, 1, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "Complimenti hai terminato il nostro gioco, ci fa piacere che hai giocato bla bla bla"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseCompletedPanelButton" type="TextureButton" parent="ColorRect/CompletedGamePanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -62.0
+offset_top = 3.0
+offset_right = 83.0
+offset_bottom = 140.0
+grow_horizontal = 0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("4_0s2q6")
+texture_hover = ExtResource("4_s4gi3")
+
+[node name="CreditsPanel" type="Panel" parent="ColorRect"]
+visible = false
+layout_mode = 0
+offset_left = 377.0
+offset_top = 82.0
+offset_right = 764.0
+offset_bottom = 571.0
+
+[node name="CreditsText" type="RichTextLabel" parent="ColorRect/CreditsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_right = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.596078, 0.439216, 0.717647, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "Executive:
+		gVigilan
+Artist:
+	gFezzuog
+Mechanics:
+	mBardett
+	lPennisi"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="CloseCreditsPanelButton" type="TextureButton" parent="ColorRect/CreditsPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_top = 6.0
+offset_right = 75.0
+offset_bottom = 139.0
+grow_horizontal = 0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("4_0s2q6")
+texture_hover = ExtResource("4_s4gi3")
+
+[connection signal="pressed" from="ColorRect/LevelMenu/Level2" to="." method="_on_level_2_pressed"]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8qeju16pnxgl"]
+
+[ext_resource type="PackedScene" uid="uid://cfo2qwjimef8b" path="res://scene/PauseMenu/pause_menu.tscn" id="1_0hwgs"]
+[ext_resource type="PackedScene" uid="uid://dc3vmt2vcn4eb" path="res://scene/EndGameMenu/EndGameMenu.tscn" id="2_7ycii"]
+
+[node name="Camera" type="Camera2D"]
+position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("1_0hwgs")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EndGameMenu" parent="CanvasLayer" instance=ExtResource("2_7ycii")]
+visible = false
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 579.0
+offset_top = 322.0
+offset_right = 579.0
+offset_bottom = 322.0

@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://beo1qeakpxow8"]
+
+[ext_resource type="Script" uid="uid://dioxybdu64p45" path="res://scene/Levels/script/level.gd" id="1_jyi8j"]
+[ext_resource type="PackedScene" uid="uid://c4p76b4g0rrfb" path="res://scene/Maps/Map01.tscn" id="1_t4jum"]
+[ext_resource type="PackedScene" uid="uid://c5ponjbg31fcl" path="res://scene/Player/PlayerSpawner.tscn" id="2_jyi8j"]
+[ext_resource type="PackedScene" uid="uid://b8qeju16pnxgl" path="res://scene/Levels/Camera/Camera.tscn" id="4_foll6"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_jyi8j")
+
+[node name="Map01" parent="." instance=ExtResource("1_t4jum")]
+
+[node name="PlayerSpawner" parent="." instance=ExtResource("2_jyi8j")]
+position = Vector2(1271, -709)
+spawn_id = 0
+
+[node name="Camera" parent="." instance=ExtResource("4_foll6")]

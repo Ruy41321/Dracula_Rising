@@ -1,0 +1,152 @@
+[gd_scene load_steps=13 format=3 uid="uid://bv0ohawc54tgm"]
+
+[ext_resource type="Script" uid="uid://dm8hm62mu840s" path="res://scene/Enemies/ArcherBoss/script/archerBoss.gd" id="1_adbkj"]
+[ext_resource type="Shader" uid="uid://b45nosbtdqb2e" path="res://scene/Enemies/ArcherBoss/script/ArcherBoss.gdshader" id="2_7nip2"]
+[ext_resource type="Texture2D" uid="uid://hlej4sdju2h1" path="res://assets/Archer/walk_idle.png" id="2_adbkj"]
+[ext_resource type="PackedScene" uid="uid://eel4n860uep8" path="res://scene/Enemies/EnemiesHpBar/HpBar.tscn" id="3_u1dup"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yms6v"]
+radius = 818.698
+height = 1637.4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xlkbe"]
+radius = 217.779
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5v1x0"]
+radius = 23.0
+height = 74.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nip2"]
+shader = ExtResource("2_7nip2")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 60.0
+shader_parameter/beam_size = 0.0
+shader_parameter/color = Color(0, 1.02, 1.2, 1)
+
+[sub_resource type="Animation" id="Animation_adbkj"]
+resource_name = "idle"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_7nip2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ysl0k"]
+resource_name = "walk"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0pfu5"]
+_data = {
+&"RESET": SubResource("Animation_7nip2"),
+&"idle": SubResource("Animation_adbkj"),
+&"walk": SubResource("Animation_ysl0k")
+}
+
+[node name="ArcherBoss" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_adbkj")
+
+[node name="AttackArea" type="Area2D" parent="."]
+scale = Vector2(1.20313, 1.23438)
+collision_layer = 0
+collision_mask = 4
+
+[node name="AtkCollision" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CapsuleShape2D_yms6v")
+debug_color = Color(0.560784, 0.54902, 0.286275, 0.054902)
+
+[node name="ArrowRayCast" type="RayCast2D" parent="AttackArea"]
+target_position = Vector2(310, 0)
+collision_mask = 5
+
+[node name="AggroArea" type="Area2D" parent="."]
+scale = Vector2(1.20313, 1.23438)
+collision_layer = 0
+collision_mask = 4
+
+[node name="AggroCollision" type="CollisionShape2D" parent="AggroArea"]
+shape = SubResource("CircleShape2D_xlkbe")
+debug_color = Color(0, 0.752941, 0.878431, 0.0470588)
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+position = Vector2(3, 10)
+shape = SubResource("CapsuleShape2D_5v1x0")
+debug_color = Color(0, 0.65098, 0.0745098, 0.133333)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_7nip2")
+position = Vector2(2, 6)
+scale = Vector2(1.60157, 2.46876)
+texture = ExtResource("2_adbkj")
+hframes = 7
+vframes = 2
+
+[node name="LeftFloorCast" type="RayCast2D" parent="Sprite"]
+position = Vector2(-6.86828, 15.3923)
+target_position = Vector2(0, 29)
+
+[node name="RightFloorCast" type="RayCast2D" parent="Sprite"]
+position = Vector2(9.36583, 15.3923)
+target_position = Vector2(0, 29)
+
+[node name="ChangeDirectionTimer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="HpBar" parent="." instance=ExtResource("3_u1dup")]
+offset_left = -19.0
+offset_top = -44.0
+offset_right = 77.0
+offset_bottom = -20.0
+
+[node name="RetraitTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="TeleportTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0pfu5")
+}

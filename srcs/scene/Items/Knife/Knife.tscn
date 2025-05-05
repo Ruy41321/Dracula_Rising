@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://gp0ov810isha"]
+
+[ext_resource type="Script" uid="uid://d1fgfoxlmc4n8" path="res://scene/Items/Knife/knife.gd" id="1_jlr21"]
+[ext_resource type="Texture2D" uid="uid://c2w4d5gnxrc3f" path="res://assets/items/knife.png" id="2_jlr21"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jlr21"]
+size = Vector2(9, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prhip"]
+size = Vector2(20, 5)
+
+[node name="Knife" type="RigidBody2D" groups=["collectibles", "weapon"]]
+collision_layer = 8
+script = ExtResource("1_jlr21")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(6.5, 0.5)
+shape = SubResource("RectangleShape2D_jlr21")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_prhip")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.171922, 0.802319)
+rotation = -1.5708
+scale = Vector2(0.79942, 1.10188)
+texture = ExtResource("2_jlr21")

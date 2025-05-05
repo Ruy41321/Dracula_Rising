@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=3 uid="uid://bu6ykgieobxwy"]
+
+[ext_resource type="Script" uid="uid://vcdm4qrv8jn8" path="res://scene/KnightBoss/Script/knishtBoss.gd" id="1_31u5s"]
+[ext_resource type="Texture2D" uid="uid://pcvhbf1onaj3" path="res://assets/Medieval_Castle_Asset_Pack/Characters/knight/idle/idle_knight_1.png" id="1_qap0w"]
+[ext_resource type="Texture2D" uid="uid://hrdh2k7ki3q7" path="res://assets/Alternative 2/1/Alternative_2_01.png" id="2_31u5s"]
+[ext_resource type="Texture2D" uid="uid://csnn57vqmk51i" path="res://assets/Alternative 2/1/Alternative_2_02.png" id="3_ukoqr"]
+[ext_resource type="Texture2D" uid="uid://cdpt47wmyhqao" path="res://assets/Alternative 2/1/Alternative_2_03.png" id="4_ub8ym"]
+[ext_resource type="Texture2D" uid="uid://dv5otnu1ekei8" path="res://assets/Alternative 2/1/Alternative_2_04.png" id="5_f3crx"]
+[ext_resource type="Texture2D" uid="uid://dofpegp3uo845" path="res://assets/Alternative 2/1/Alternative_2_05.png" id="6_634lg"]
+[ext_resource type="Texture2D" uid="uid://cco4poopp1bk3" path="res://assets/Alternative 2/1/Alternative_2_06.png" id="7_g03le"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qf3uh"]
+radius = 37.0
+height = 136.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gbfuu"]
+radius = 20.0
+height = 64.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cgdbm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_31u5s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ukoqr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ub8ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f3crx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_634lg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_g03le")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 13.0
+}]
+
+[node name="KnightBoss" type="CharacterBody2D"]
+script = ExtResource("1_31u5s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 29)
+shape = SubResource("CapsuleShape2D_qf3uh")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_qap0w")
+
+[node name="TargetRayCast" type="RayCast2D" parent="Sprite"]
+visible = false
+scale = Vector2(1, 10)
+target_position = Vector2(100, 0)
+
+[node name="LeftFloorCast" type="RayCast2D" parent="Sprite"]
+position = Vector2(-14, 22)
+target_position = Vector2(0, 29)
+
+[node name="RightFloorCast" type="RayCast2D" parent="Sprite"]
+position = Vector2(12, 22)
+target_position = Vector2(0, 29)
+
+[node name="AttackArea" type="Area2D" parent="Sprite"]
+position = Vector2(20, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AttackArea"]
+shape = SubResource("CapsuleShape2D_gbfuu")
+debug_color = Color(0.560784, 0.411765, 0.286275, 0.141176)
+
+[node name="SlashAnim" type="AnimatedSprite2D" parent="Sprite/AttackArea"]
+position = Vector2(-1, 6)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_cgdbm")
+
+[node name="RetraitTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

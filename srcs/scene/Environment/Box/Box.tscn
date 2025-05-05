@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvm24bxi2mxc4"]
+
+[ext_resource type="Script" uid="uid://dii36fj3psh1v" path="res://scene/Environment/Box/script/box.gd" id="1_a64ad"]
+[ext_resource type="Texture2D" uid="uid://ox6tj6saom42" path="res://assets/environment/GBox01.jpg" id="2_adh5x"]
+[ext_resource type="PackedScene" uid="uid://eel4n860uep8" path="res://scene/Enemies/EnemiesHpBar/HpBar.tscn" id="3_adh5x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l0bc1"]
+size = Vector2(32, 32)
+
+[node name="Box" type="StaticBody2D" groups=["box"]]
+scale = Vector2(0.6, 0.6)
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_a64ad")
+
+[node name="Chest1" type="Sprite2D" parent="."]
+position = Vector2(2, -2)
+texture = ExtResource("2_adh5x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -2)
+shape = SubResource("RectangleShape2D_l0bc1")
+
+[node name="HpBar" parent="." instance=ExtResource("3_adh5x")]
+visible = false
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 77.0
+offset_bottom = 4.0

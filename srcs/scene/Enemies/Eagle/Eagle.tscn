@@ -1,0 +1,148 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3uv8c4l8qlul"]
+
+[ext_resource type="Script" uid="uid://bohy21hga2uyf" path="res://scene/Enemies/Eagle/script/eagle.gd" id="1_1coor"]
+[ext_resource type="Texture2D" uid="uid://cfqnqi2h4bukr" path="res://assets/Eagle/eagle.png" id="3_0mdye"]
+[ext_resource type="PackedScene" uid="uid://eel4n860uep8" path="res://scene/Enemies/EnemiesHpBar/HpBar.tscn" id="3_uq2s0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a270q"]
+radius = 9.99996
+
+[sub_resource type="Animation" id="Animation_chk2r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_to54l"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.733333),
+"transitions": PackedFloat32Array(0.450625, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+
+[sub_resource type="Animation" id="Animation_0mdye"]
+resource_name = "fly"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.8667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_to54l"]
+_data = {
+&"RESET": SubResource("Animation_chk2r"),
+&"die": SubResource("Animation_to54l"),
+&"fly": SubResource("Animation_0mdye")
+}
+
+[node name="Eagle" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_1coor")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_a270q")
+debug_color = Color(0.027451, 0.858824, 1, 0.121569)
+
+[node name="AtkArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="RightCollision" type="CollisionPolygon2D" parent="AtkArea"]
+visible = false
+position = Vector2(-6, 5)
+polygon = PackedVector2Array(-6, 3, 11, 3, 11, -2, 20, -2, 19, 6, 12, 10, -4, 10)
+
+[node name="LeftCollision" type="CollisionPolygon2D" parent="AtkArea"]
+position = Vector2(9, -1)
+polygon = PackedVector2Array(-11, 5, -23, 4, -20, 13, -15, 16, 2, 16, 3, 8, -9, 8)
+disabled = true
+
+[node name="DeadArea" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, 1)
+collision_layer = 0
+collision_mask = 4
+
+[node name="RightCollision" type="CollisionPolygon2D" parent="DeadArea"]
+visible = false
+polygon = PackedVector2Array(-16, -10, -11, -13, -2, -1, 6, -11, 14, -10, 9, -1, 11, 3, -9, 6, -6, 1)
+
+[node name="LeftCollision" type="CollisionPolygon2D" parent="DeadArea"]
+position = Vector2(9, -3)
+polygon = PackedVector2Array(3, 9, -4, 4, 8, -7, 2, -9, -7, 1, -16, -8, -23, -7, -18, 1, -20, 6)
+disabled = true
+
+[node name="HpBar" parent="." instance=ExtResource("3_uq2s0")]
+offset_left = -19.0
+offset_top = -23.0
+offset_right = 77.0
+offset_bottom = 1.0
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(1, 3)
+scale = Vector2(1.175, 0.625)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_0mdye")
+flip_h = true
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_to54l")
+}
+autoplay = "fly"

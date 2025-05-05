@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7b1e4ko2gy5o"]
+
+[ext_resource type="Texture2D" uid="uid://xr6gxlqmqahf" path="res://assets/Props/Chandelier.png" id="1_48fjl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vt7wg"]
+radius = 10.5119
+
+[node name="Grappable" type="Node2D"]
+scale = Vector2(1.8, 1.8)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["grappable"]]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(1.425, 0.535)
+shape = SubResource("CircleShape2D_vt7wg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_48fjl")

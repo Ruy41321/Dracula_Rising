@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://drufsfdmh8cbh"]
+
+[ext_resource type="Script" uid="uid://b1qwy7aamfm0" path="res://scene/Environment/MovPlat/script/mov_plat.gd" id="1_71ptv"]
+[ext_resource type="Texture2D" uid="uid://lsu5yiluu1rt" path="res://assets/mapTile/TileMapMau001.png" id="2_10rce"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvubi"]
+size = Vector2(77, 19)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_14a13"]
+texture = ExtResource("2_10rce")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+1:1/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+1:3/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_bhikf"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_14a13")
+
+[sub_resource type="Animation" id="Animation_fa6xg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_71ptv"]
+resource_name = "moving"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-1.56, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qvubi"]
+_data = {
+&"RESET": SubResource("Animation_fa6xg"),
+&"moving": SubResource("Animation_71ptv")
+}
+
+[node name="MovPlat" type="Path2D"]
+script = ExtResource("1_71ptv")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(0.5, -9.5)
+shape = SubResource("RectangleShape2D_qvubi")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="AnimatableBody2D"]
+scale = Vector2(0.605, 0.605)
+tile_map_data = PackedByteArray(0, 0, 254, 255, 255, 255, 1, 0, 0, 0, 4, 0, 0, 0, 255, 255, 255, 255, 1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 255, 255, 1, 0, 0, 0, 4, 0, 0, 0, 1, 0, 255, 255, 1, 0, 0, 0, 4, 0, 0, 0)
+tile_set = SubResource("TileSet_bhikf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qvubi")
+}
