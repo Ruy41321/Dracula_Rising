@@ -4,12 +4,12 @@
 
 ## Team
 ### Mechanics
-- **Luigi Pennisi**: AI programming for all enemies, implementation and physics management for pickup items (throwable weapons and consumable objects), environmental objects (e.g., crates, drawbridges, moving platforms).
-- **xxx**: Implementation of the Player, Level Design
+- **Luigi Pennisi (me)**: AI programming for all enemies, implementation and physics management for pickup items (throwable weapons and consumable objects), environmental objects (e.g., crates, drawbridges, moving platforms).
+- **Mauro Bardetta** ([GitHub Profile](https://github.com/mbardett)): Implementation of the Player, Level Design
 ### Artist
-- **xxx2**
+- **x** ([GitHub Profile]())
 ### Executive
-- **xxx3**:
+- **x ([GitHub Profile]()
 
 ## Features
 
