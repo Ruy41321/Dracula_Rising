@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ddwkyujmo707f" path="res://scene/EndGameMenu/script/end_game_menu.gd" id="1_e7b4v"]
 [ext_resource type="Shader" uid="uid://b387f6ixgiw0n" path="res://scene/PauseMenu/script/shader/pause_menu.gdshader" id="2_rfxqy"]
-[ext_resource type="Texture2D" uid="uid://b2lr8a17ywwd5" path="res://assets/HUD/Box.png" id="3_hksus"]
+[ext_resource type="Texture2D" uid="uid://bn5piqxwn3f6i" path="res://assets/HUD/Box.png" id="3_hksus"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hksus"]
 shader = ExtResource("2_rfxqy")
@@ -20,6 +20,8 @@ offset_left = -576.0
 offset_top = -324.0
 offset_right = -576.0
 offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_e7b4v")
 
 [node name="ColorRect2" type="ColorRect" parent="."]
