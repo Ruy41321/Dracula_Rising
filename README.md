@@ -9,7 +9,7 @@ This project was created as part of a group effort, with each member contributin
 ## 👥 Team
 
 ### ⚙️ Mechanics
-- **Luigi Pennisi (me)**: 🧠 AI programming for all enemies, 🎯 implementation and physics management for pickup items (throwable weapons and consumable objects), 🧱 environmental objects (e.g., crates, drawbridges, moving platforms).
+- **Luigi Pennisi ([me](https://github.com/Ruy41321))**: 🧠 AI programming for all enemies, 🎯 implementation and physics management for pickup items (throwable weapons and consumable objects), 🧱 environmental objects (e.g., crates, drawbridges, moving platforms).
 - **Mauro Bardetta** ([GitHub Profile](https://github.com/mbardett)): 🧍‍♂️ Implementation of the Player, 🗺️ Level Design
 
 ### 🎨 Artist
